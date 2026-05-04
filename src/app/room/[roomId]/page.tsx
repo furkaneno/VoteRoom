@@ -109,7 +109,9 @@ export default function RoomPage() {
     const joined = sessionStorage.getItem(`vr_joined_${roomId}`);
     getRoom(roomId).then((r) => {
       if (!r) { router.replace("/"); return; }
-      if (r.hostId === user.uid || joined) setIsParticipant(true);
+      if (user && (r.hostId === user.uid || joined)) {
+  setIsParticipant(true);
+}
       setChecking(false);
     });
   }, [authLoading, user, roomId, router]);

@@ -105,7 +105,7 @@ export default function RoomPage() {
 
   /* ── Participant check ── */
   useEffect(() => {
-    if (authLoading || !user || !roomId) return;
+    if (authLoading || !roomId) return;
     const joined = sessionStorage.getItem(`vr_joined_${roomId}`);
     getRoom(roomId).then((r) => {
       if (!r) { router.replace("/"); return; }

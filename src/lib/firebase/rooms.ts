@@ -12,7 +12,13 @@ import {
 import { db } from "./config";
 import { Room, Participant, Vote, TimerState, VotingType, Avatar } from "@/types";
 import { customAlphabet } from "nanoid";
+import { doc, updateDoc } from "firebase/firestore";
 
+
+export const updateRoom = async (roomId: string, data: any) => {
+  const ref = doc(db, "rooms", roomId);
+  await updateDoc(ref, data);
+};
 const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 8);
 export const generateRoomId = () => nanoid();
 

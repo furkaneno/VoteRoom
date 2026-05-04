@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Light Theme (default) ── */
+:root {
+  --bg:            #f4f5f9;
+  --bg-secondary:  #ecedf3;
+  --bg-card:       #ffffff;
+  --bg-card2:      #f8f9fc;
+  --border:        rgba(0,0,0,0.07);
+  --border-strong: rgba(0,0,0,0.13);
+  --text-primary:  #0f0f1a;
+  --text-secondary:#6b7280;
+  --text-muted:    #9ca3af;
+  --brand:         #6366f1;
+  --brand-soft:    rgba(99,102,241,0.1);
+  --brand-border:  rgba(99,102,241,0.25);
+  --shadow-card:   0 2px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-hover:  0 8px 28px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.06);
+  --glass-bg:      rgba(255,255,255,0.75);
+  --glass-border:  rgba(0,0,0,0.08);
+  --header-bg:     rgba(255,255,255,0.88);
+  --header-border: rgba(0,0,0,0.07);
+  --vote-low:      #ef4444;
+  --vote-low-bg:   rgba(239,68,68,0.09);
+  --vote-low-glow: rgba(239,68,68,0.2);
+  --vote-mid:      #f59e0b;
+  --vote-mid-bg:   rgba(245,158,11,0.09);
+  --vote-mid-glow: rgba(245,158,11,0.2);
+  --vote-good:     #3b82f6;
+  --vote-good-bg:  rgba(59,130,246,0.09);
+  --vote-good-glow:rgba(59,130,246,0.2);
+  --vote-high:     #10b981;
+  --vote-high-bg:  rgba(16,185,129,0.09);
+  --vote-high-glow:rgba(16,185,129,0.2);
+}
+/* ── Dark Theme ── */
+.dark {
+  --bg: #0b0f19; /* TEK RENK */
+  --bg-secondary:  #0a0b1a;
+  --bg-card:       rgba(255,255,255,0.04);
+  --bg-card2:      rgba(255,255,255,0.025);
+  --border:        rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.15);
+  --text-primary:  #f0f4ff;
+  --text-secondary:#94a3b8;
+  --text-muted:    #64748b;
+  --brand:         #818cf8;
+  --brand-soft:    rgba(99,102,241,0.15);
+  --brand-border:  rgba(129,140,248,0.3);
+  --shadow-card:   0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+  --shadow-hover:  0 16px 48px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+  --glass-bg:      rgba(255,255,255,0.04);
+  --glass-border:  rgba(255,255,255,0.08);
+  --header-bg:     rgba(10,11,26,0.88);
+  --header-border: rgba(255,255,255,0.06);
+  --vote-low:      #f87171;
+  --vote-low-bg:   rgba(248,113,113,0.13);
+  --vote-low-glow: rgba(248,113,113,0.3);
+  --vote-mid:      #fbbf24;
+  --vote-mid-bg:   rgba(251,191,36,0.13);
+  --vote-mid-glow: rgba(251,191,36,0.3);
+  --vote-good:     #60a5fa;
+  --vote-good-bg:  rgba(96,165,250,0.13);
+  --vote-good-glow:rgba(96,165,250,0.3);
+  --vote-high:     #34d399;
+  --vote-high-bg:  rgba(52,211,153,0.13);
+  --vote-high-glow:rgba(52,211,153,0.3);
+}
+
+/* ─────────────────────────────────────────────────── */
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display { font-family: 'Sora', sans-serif; }
+
+/* Cards */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  border-radius: 16px;
+}
+
+/* Glass */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Inputs */
+.themed-input {
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+.themed-input::placeholder { color: var(--text-muted); }
+.themed-input:focus {
+  border-color: var(--brand-border);
+  outline: none;
+  background: var(--bg-card);
+}
+
+/* Background meshes */
+.page-bg {
+  background: var(--bg);
+  position: relative;
+}
+
+
+/* Grid overlay (dark only) */
+.dark body {
+  background: radial-gradient(
+      circle at 20% 20%,
+      rgba(99, 102, 241, 0.15),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(139, 92, 246, 0.12),
+      transparent 40%
+    ),
+    #0b0f19;
+}
+
+
+.light body {
+  background: radial-gradient(
+      circle at 10% 10%,
+      rgba(99, 102, 241, 0.08),
+      transparent 40%
+    ),
+    #f8fafc;
+}
+
+/* Neon glow (dark only) */
+.dark .neon-btn {
+  box-shadow: 0 0 28px rgba(99,102,241,0.4), 0 4px 16px rgba(0,0,0,0.35);
+}
+.light .neon-btn {
+  box-shadow: 0 4px 16px rgba(99,102,241,0.3), 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* Vote colour classes */
+.vote-low  { color: var(--vote-low);  background: var(--vote-low-bg);  }
+.vote-mid  { color: var(--vote-mid);  background: var(--vote-mid-bg);  }
+.vote-good { color: var(--vote-good); background: var(--vote-good-bg); }
+.vote-high { color: var(--vote-high); background: var(--vote-high-bg); }
+
+/* Card flip */
+@keyframes flipIn {
+  0%   { transform: rotateY(-90deg) scale(0.85); opacity: 0; }
+  65%  { transform: rotateY(8deg)   scale(1.04); opacity: 1; }
+  100% { transform: rotateY(0deg)   scale(1);    opacity: 1; }
+}
+.flip-in { animation: flipIn 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* Float animation */
+@keyframes float {
+  0%,100% { transform: translateY(0px); }
+  50%      { transform: translateY(-9px); }
+}
+.float { animation: float 5s ease-in-out infinite; }
+
+/* Pulse ring */
+@keyframes ping-ring {
+  75%,100% { transform: scale(2); opacity: 0; }
+}
+.ping-ring { animation: ping-ring 2s cubic-bezier(0,0,0.2,1) infinite; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Focus */
+*:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 4px; }
+
+/* Font fallback */
+input, textarea, button, select { font-family: 'DM Sans', sans-serif; }

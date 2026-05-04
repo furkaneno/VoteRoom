@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { Room, Participant, Vote, TimerState, VotingType, Avatar } from "@/types";
 import { customAlphabet } from "nanoid";
-
+import { db } from "./config";
 export const updateRoom = async (roomId: string, data: any) => {
   const ref = doc(db, "rooms", roomId);
   await updateDoc(ref, data);

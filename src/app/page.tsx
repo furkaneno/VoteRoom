@@ -168,7 +168,7 @@ export default function LandingPage() {
           className="text-center text-[11px] mt-5"
           style={{ color: "var(--text-muted)" }}
         >
-          No account needed · Free forever · Instant rooms
+          Developed by @FurkanUzunabdullah
         </motion.p>
       </motion.div>
     </div>

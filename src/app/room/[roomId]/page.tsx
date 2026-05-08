@@ -14,6 +14,8 @@ import VotingPanel from "@/components/voting/VotingPanel";
 import ResultsPanel from "@/components/results/ResultsPanel";
 import HostControls from "@/components/room/HostControls";
 import TopicBar from "@/components/room/TopicBar";
+import { updateDoc, doc } from "firebase/firestore";
+import { db } from "@/lib/firebase/config";
 
 /* ── Inline join gate (shown when url opened by non-member) ── */
 function JoinGate({ roomId, onJoined }: { roomId: string; onJoined: () => void }) {
@@ -104,6 +106,56 @@ export default function RoomPage() {
   } = useVotes(roomId, user?.uid, participants, room?.round ?? 1);
 
   /* ── Participant check ── */
+  /* ── Online / Offline presence ── */
+  useEffect(() => {
+    if (!user || !roomId) return;
+
+    const setOffline = async () => {
+      try {
+        await updateDoc(
+          doc(db, "rooms", roomId, "participants", user.uid),
+          {
+            online: false,
+            lastSeen: Date.now(),
+          }
+        );
+      } catch (e) {
+        console.log("offline update failed", e);
+      }
+    };
+
+    const setOnline = async () => {
+      try {
+        await updateDoc(
+          doc(db, "rooms", roomId, "participants", user.uid),
+          {
+            online: true,
+            lastSeen: Date.now(),
+          }
+        );
+      } catch (e) {
+        console.log("online update failed", e);
+      }
+    };
+
+    setOnline();
+
+    window.addEventListener("beforeunload", setOffline);
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") {
+        setOffline();
+      } else {
+        setOnline();
+      }
+    });
+
+    return () => {
+      setOffline();
+      window.removeEventListener("beforeunload", setOffline);
+    };
+  }, [user, roomId]);
+
   useEffect(() => {
     if (authLoading || !roomId) return;
     const joined = sessionStorage.getItem(`vr_joined_${roomId}`);
